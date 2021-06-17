@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "configurationProvider": "vector-of-bool.cmake-tools",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
