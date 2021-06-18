@@ -8,8 +8,10 @@
 #include <sstream>
 #include <iomanip>
 #include <sys/stat.h>
+#include <vector>
 
 namespace Utils{
+    using StringList = std::vector<std::string>;
     
     /**
      * NOTE, it works to have both the declaration and definition of a function in a h file
@@ -57,6 +59,29 @@ namespace Utils{
      * Returns "./" if we are executing in the project folder or "../" if we are executing in the build folder
      */
     std::string getRelativePrefix();
+
+    /**
+     * @brief validate if a single file exist, prints error message if file is missing
+     * @param file
+     * @return false if file does not exist
+     */
+    [[nodiscard]] bool validateFile(const std::string &file);
+
+    /**
+     * @brief validate if a list files exist, prints error message if file is missing
+     * @param files
+     * @return false if one or more files is missing
+     */
+    [[nodiscard]] bool validateFiles(const StringList &files);
+
+    /**
+     * @brief Get the File List From dir folder, only files with extension specified in extension.
+     * 
+     * @param dir 
+     * @param extension Should be given in the format .log, .txt, .ini etc.
+     * @return std::vector<std::string> 
+     */
+    std::vector<std::string> getFileListFromDir(std::string dir, std::string extension);
 }
 
 #endif //MULTIPART_UTILS_H

@@ -1,5 +1,5 @@
 # person_tracker
-A program in c++ that uses yolov3 or yolov4 to detect persons from web camera and then track the person that is clicked on.
+A program in c++ that uses yolov3 or yolov4 to detect persons from video file or web camera and then tracks the selected person that is clicked on, or tracks the object that is marked by click and drag.
 Includes some external libs
 - Boost (for nice file handling stuff in c++)
 - fmt (for modern string handling)

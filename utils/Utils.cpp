@@ -1,6 +1,9 @@
 #include "Utils.h"
 #include "date.h"
 #include <experimental/filesystem>
+#include "boost/filesystem.hpp"
+#include <boost/range/iterator_range.hpp>
+
 namespace fs = std::experimental::filesystem;
 
 namespace Utils{
@@ -71,5 +74,37 @@ namespace Utils{
             // We are executing from the project folder (cpp_multipart). It was probably started with VsCode run
             return "./";
         }
+    }
+
+    bool validateFile(const std::string &file) {
+        if(boost::filesystem::exists(file) && boost::filesystem::is_regular_file(file)){
+            return true;
+        }else {
+            Utils::print("Error!!!: "+file+" not found.");
+            return false;
+        }
+    }
+
+    bool validateFiles(const StringList &files){
+        bool no_missing_file = true;
+        for(auto &file: files){
+            if(!validateFile(file)){
+               no_missing_file = false;
+            }
+        }
+        return no_missing_file;
+    }
+
+    std::vector<std::string> getFileListFromDir(std::string dir, std::string extension) {
+        boost::filesystem::recursive_directory_iterator it(dir), end;
+
+        std::vector<std::string> files;
+        for (auto &entry : boost::make_iterator_range(it, end)) {
+            if (is_regular_file(entry) && (entry.path().extension().string() == extension)) {
+                files.push_back(entry.path().native());
+            }
+        }
+
+        return files;
     }
 }
